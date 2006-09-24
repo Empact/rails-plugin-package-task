@@ -71,19 +71,19 @@ module Rake
   # each folder (that contains a file), and creates a directory structure that you
   # can publish as a set for your plugin.
   # 
-  # Some attributes that can be set:
+  # Noteworthy attributes:
   # 
-  #   [package_dir]  Directory to store the package. Default 'pkg/rails_plugin'
+  # [package_dir]  Directory to store the package. Default 'pkg/rails_plugin'
   #   
-  #   [package_dir]  Files to include in the plugin.
+  # [package_dir]  Files to include in the plugin.
   #   
-  #   [extra_links]  Links to put on every generated index page. Can be a hash, e.g.
-  #                  {"Home"=>"http://roxml.rubyforge.org"}, an array of strings or
-  #                  a single string.
+  # [extra_links]  Links to put on every generated index page. Can be a hash, e.g.
+  #                {"Home"=>"http://roxml.rubyforge.org"}, an array of strings or
+  #                a single string.
   #                  
-  #   [plugin_files]  Files to be placed in the root folder of the plug-in, e.g.
-  #                   init.rb. All files that are in the root of _package_dir_
-  #                   will also be placed in the root of the plug-in.
+  # [plugin_files]  Files to be placed in the root folder of the plug-in, e.g.
+  #                 init.rb. All files that are in the root of _package_dir_
+  #                 will also be placed in the root of the plug-in.
   #                   
   class RailsPluginPackageTask < TaskLib
     # Name of plug-in or application
@@ -101,14 +101,14 @@ module Rake
     # Verbose [true | false]
     attr_accessor :verbose
 
-    # Create a package task
+    # Create the "rails_plugin" task
     def initialize(name=nil, version=nil)
       init(name, version)
       yield self if block_given?
       define unless name.nil?
     end
 
-    # Init without yield self and define
+    # Initialize with defaults
     def init(name, version)
       @name = name
       @version = version
@@ -120,20 +120,7 @@ module Rake
       @verbose = false
     end
     
-    def add_file(filename)
-      dir = File.dirname(filename).gsub("#{@dest}",".")
-      fn = File.basename(filename)
-      folder = @folders[dir] || @folders[dir]=[]
-      folder << fn
-    end
-
-    def add_folder(folder_name)
-      dir = File.dirname(folder_name).gsub("#{@dest}",".").gsub("./","")
-      fn = File.basename(folder_name) + "/"
-      folder = @folders[dir] || @folders[dir]=[]
-      folder << fn
-    end
-    
+    # Define the rails_plugin task
     def define
       desc "Create Ruby on Rails plug-in package"
       task :rails_plugin do
@@ -165,6 +152,7 @@ module Rake
       end
     end
 
+    # Generate the index.html files
     def generate_index_files
       @folders.each do |folder, files|
         puts " + Creating #{@dest}/#{folder}/index.html" if @verbose
@@ -187,6 +175,23 @@ module Rake
     end
             
   private
+    # Add a file to the folders hash
+    def add_file(filename)
+      dir = File.dirname(filename).gsub("#{@dest}",".")
+      fn = File.basename(filename)
+      folder = @folders[dir] || @folders[dir]=[]
+      folder << fn
+    end
+
+    # Add a folder to the folders hash
+    def add_folder(folder_name)
+      dir = File.dirname(folder_name).gsub("#{@dest}",".").gsub("./","")
+      fn = File.basename(folder_name) + "/"
+      folder = @folders[dir] || @folders[dir]=[]
+      folder << fn
+    end
+    
+    # Create the anchor tag for extra links
     def create_extra_links
       return nil unless @extra_links
       x_links = ""
