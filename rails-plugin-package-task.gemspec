@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.author   = "Zak Mandhro"
   s.files    = ["MIT-LICENSE",
         "Rakefile",
-        "README", 
+        "README.rdoc", 
         "rails-plugin-package-task.gemspec", 
         "lib/rails_plugin_package_task.rb"]
   s.require_path = 'lib'
