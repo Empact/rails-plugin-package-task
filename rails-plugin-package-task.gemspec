@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
         "rails-plugin-package-task.gemspec", 
         "lib/rails_plugin_package_task.rb"]
   s.require_path = 'lib'
-  s.rdoc_options = ["--main", "README"]
-  s.extra_rdoc_files = ["README"]
+  s.extra_rdoc_files = ["README.rdoc", 'MIT-LICENSE']
+  s.rdoc_options << '--line-numbers' << '--inline-source' <<
+                    '--title' << 'Rails Plugin Package Task' <<
+                    '--main' << 'lib/rails_plugin_package_task.rb'
 end

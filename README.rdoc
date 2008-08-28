@@ -1,0 +1,4 @@
+= Rails Plugin Package task for Rake
+
+This provides a Rake task designed to automate
+the publishing of Rail plug-ins.

@@ -10,5 +10,6 @@ end
 Rake::RDocTask.new do |rd|
   rd.rdoc_dir = "doc"
   rd.rdoc_files.include("lib/**/*.rb")
+  rd.rdoc_files.include(spec.extra_rdoc_files)
   rd.options = spec.rdoc_options
 end
