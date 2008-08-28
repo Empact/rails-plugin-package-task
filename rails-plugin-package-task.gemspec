@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.extra_rdoc_files = ["README.rdoc", 'MIT-LICENSE']
   s.rdoc_options << '--line-numbers' << '--inline-source' <<
-                    '--title' << 'Rails Plugin Package Task' <<
-                    '--main' << 'lib/rails_plugin_package_task.rb'
+                    '--title' << 'Rails Plug-in Package Task' <<
+                    '--main' << 'README.rdoc'
 end
